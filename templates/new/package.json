@@ -1,0 +1,26 @@
+{
+  "name": "buntralino-sample-app",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "preinstall": "npx only-allow bun",
+    "run": "bun buildScripts.ts dev",
+    "dev": "bun buildScripts.ts dev",
+    "build": "bun buildScripts.ts build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@neutralinojs/lib": "^5.5.0",
+    "buntralino": "^1.0.5",
+    "buntralino-client": "^1.0.1"
+  },
+  "devDependencies": {
+    "@neutralinojs/neu": "^11.3.0",
+    "@types/bun": "^1.1.14",
+    "esbuild": "^0.24.0"
+  }
+}

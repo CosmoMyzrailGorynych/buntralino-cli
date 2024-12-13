@@ -1,0 +1,51 @@
+html, body {
+    position: relative;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    background-color: #18181c;
+    color: white;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    justify-content: space-around;
+    font-family: sans-serif;
+}
+
+a {
+    color: #fff;
+}
+
+#neutralinoapp {
+    text-align: center;
+    -webkit-user-select: none;
+    user-select: none;
+    cursor: default;
+    animation: flowIn 1 1s cubic-bezier(0.24, 0, 0.2, 1);
+}
+
+.logo {
+    max-width: 100%;
+    width: 300px;
+}
+
+#neutralinoapp h1 {
+    font-family: serif;
+    font-size: 2rem;
+    margin: 0.5em 0;
+}
+
+#neutralinoapp > div {
+    font-size: 16px;
+    font-weight: normal;
+}
+
+@keyframes flowIn {
+    0% {
+        transform: translate(0, 5rem) scale(0.85);
+        opacity: 0;
+    }
+}

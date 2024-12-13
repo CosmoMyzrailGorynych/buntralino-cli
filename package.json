@@ -1,0 +1,38 @@
+{
+  "name": "buntralino-cli",
+  "version": "1.0.0",
+  "main": "index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "buntralino": "./index.ts"
+  },
+  "type": "module",
+  "keywords": [
+    "buntralino",
+    "electron",
+    "nwjs",
+    "nw.js",
+    "xpda",
+    "neutralino",
+    "bun"
+  ],
+  "author": "Cosmo Myzrail Gorynych",
+  "license": "MIT",
+  "description": "Buntralino unites Bun and Neutralino.js to make a simpler, lighter alternative to Electron and NW.js. Use Neutralino.js API at client and send harder tasks to Bun while keeping your development process easy.",
+  "dependencies": {
+    "@ctjs/png2icons": "^3.0.3",
+    "@neutralinojs/neu": "^11.3.0",
+    "@topcli/spinner": "^2.1.2",
+    "execa": "^9.5.2",
+    "fs-extra": "^11.2.0",
+    "resedit-cli": "^2.0.1",
+    "yargs": "^17.7.2"
+  },
+  "devDependencies": {
+    "@types/bun": "^1.1.14",
+    "@types/fs-extra": "^11.0.4",
+    "@types/yargs": "^17.0.33"
+  }
+}
