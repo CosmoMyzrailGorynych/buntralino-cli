@@ -57,5 +57,5 @@ export default async (name = 'buntralino-app', template = 'new') => {
 
     console.log('\nTo get started, run:\n');
     console.log(`    cd ${name}`);
-    console.log('    bun run dev');
+    console.log('    bun run dev\n');
 };
