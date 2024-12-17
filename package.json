@@ -20,6 +20,7 @@
   ],
   "files": [
     "commands",
+    "common",
     "templates",
     "index.ts",
     "Readme.md",
