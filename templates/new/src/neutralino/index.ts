@@ -13,5 +13,5 @@ import * as buntralino from 'buntralino-client';
     }
 })();
 
-(window as any).openDocs = () => Neutralino.os.open('https://buntralino.ghpages.io/');
+(window as any).openDocs = () => Neutralino.os.open('https://buntralino.github.io/');
 (window as any).openNeutralinoDocs = () => Neutralino.os.open('https://neutralino.js.org/docs/api/overview');
