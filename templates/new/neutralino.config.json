@@ -4,7 +4,7 @@
   "applicationId": "rocks.buntralino.sample",
   "version": "1.0.0",
   "applicationName": "Buntralino sample app",
-  "applicationIcon": "/app/icons/Buntralino.png",
+  "applicationIcon": "app/icons/Buntralino.png",
   "author": "Cosmo Myzrail Gorynych",
   "description": "A sample application for Buntralino",
 
@@ -35,8 +35,7 @@
       "center": true,
       "fullScreen": false,
       "alwaysOnTop": false,
-      "icon": "/app/icons/Buntralino.png",
-      "enableInspector": true,
+      "icon": "app/icons/Buntralino.png",
       "borderless": false,
       "maximize": false,
       "hidden": false,
@@ -48,6 +47,7 @@
     "binaryName": "buntralino",
     "resourcesPath": "/app/",
     "extensionsPath": "/extensions/",
+    "distributionPath": "/build",
     "clientLibrary": "/app/js/neutralino.js",
     "binaryVersion": "5.5.0",
     "clientVersion": "5.5.0"

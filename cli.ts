@@ -24,7 +24,7 @@ yargs(hideBin(process.argv))
 }, async () => {
     await add();
 })
-.command(['run [indexPath]', 'start [indexPath]'], 'Runs the Buntralino project.', (yargs) => {
+.command(['run [indexPath]', 'start'], 'Runs the Buntralino project.', (yargs) => {
     return yargs.positional('indexPath', {
         type: 'string',
         describe: 'Path to the main Bun file',
@@ -43,7 +43,7 @@ yargs(hideBin(process.argv))
         'Buntralino already passes `--compile`, `--target`, `--outfile` and minification flags.'
     );
 }, async argv => {
-    await build(argv.indexPath, argv._);
+    await build(argv.indexPath, argv._.slice(1));
 })
 .demandCommand(1)
 .recommendCommands()
