@@ -272,5 +272,5 @@ export default async (
         }
     })));
 
-    console.log('\nSucccess! Packaged applications can be found in ' + path.join(projectRoot, './build/buntralinoOutput/') + '\n');
+    console.log('\n🐇 Succcess! Packaged applications can be found in ' + path.join(projectRoot, './build/buntralinoOutput/') + '\n');
 };
