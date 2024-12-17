@@ -22,7 +22,11 @@ export default async (name = 'buntralino-app', template = 'new') => {
         task({
             text: 'Installing dependencies',
             finish: 'Dependencies installed successfully'
-         }, $$`bun install`),
+         }, (async () => {
+            await $$`bun install`;
+            await $$`bun add buntralino buntralino-client`
+            await $$`bun add -d buntralino-cli`;
+        })()),
 
         task({
             text: 'Installing Neutralino.js',
