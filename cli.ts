@@ -6,6 +6,7 @@ import {hideBin } from 'yargs/helpers';
 import build from './commands/build.ts';
 import create from './commands/create.ts';
 import run from './commands/run.ts';
+import add from './commands/add.ts';
 
 yargs(hideBin(process.argv))
 .command('create [name]', 'Creates an empty Buntralino project', (yargs) => {
@@ -20,8 +21,8 @@ yargs(hideBin(process.argv))
 })
 .command('add', 'Adds Buntralino to the existing Neutralino.js project', (yargs) => {
     return yargs;
-}, async (argv) => {
-    // TODO:
+}, async () => {
+    await add();
 })
 .command(['run [indexPath]', 'start [indexPath]'], 'Runs the Buntralino project.', (yargs) => {
     return yargs.positional('indexPath', {

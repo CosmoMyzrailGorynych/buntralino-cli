@@ -1,17 +1,7 @@
 import {$} from 'execa';
 import fs from 'fs-extra';
 import path from 'path';
-import {Spinner} from '@topcli/spinner';
-
-const task = async (opts: {
-    text: string,
-    finish?: string
-}, promise: Promise<unknown>) => {
-    const spinner = new Spinner().start(opts.text);
-    const val = await promise;
-    spinner.succeed(opts.finish ?? opts.text);
-    return val;
-};
+import task from '../common/task';
 
 export default async (name = 'buntralino-app', template = 'new') => {
     const destPath = path.join(process.cwd(), name);

@@ -35,12 +35,14 @@
     "@topcli/spinner": "^2.1.2",
     "execa": "^9.5.2",
     "fs-extra": "^11.2.0",
+    "prompts": "^2.4.2",
     "resedit-cli": "^2.0.1",
     "yargs": "^17.7.2"
   },
   "devDependencies": {
     "@types/bun": "^1.1.14",
     "@types/fs-extra": "^11.0.4",
+    "@types/prompts": "^2.4.9",
     "@types/yargs": "^17.0.33"
   }
 }

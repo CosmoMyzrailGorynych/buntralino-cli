@@ -6,8 +6,8 @@ import * as buntralino from 'buntralino-client';
     const response = await buntralino.run('sayHello', {
         message: 'Hello, Buntralino!'
     });
-    if (response instanceof Object && 'message' in response) {
-        console.log(response.message);
+    if (typeof response === 'string') {
+        console.log(response);
     } else {
         console.error('Got unknown response from Bun:', response);
     }
