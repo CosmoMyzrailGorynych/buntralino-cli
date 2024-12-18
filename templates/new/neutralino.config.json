@@ -35,7 +35,7 @@
       "center": true,
       "fullScreen": false,
       "alwaysOnTop": false,
-      "icon": "app/icons/Buntralino.png",
+      "icon": "/app/icons/Buntralino.png",
       "borderless": false,
       "maximize": false,
       "hidden": false,
