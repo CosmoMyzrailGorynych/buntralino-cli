@@ -16,7 +16,8 @@ export default async (name = 'buntralino-app', template = 'new') => {
     );
 
     const $$ = $({
-        cwd: destPath
+        cwd: destPath,
+        preferLocal: true
     });
     await Promise.all([
         task({
