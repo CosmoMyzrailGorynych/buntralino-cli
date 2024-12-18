@@ -24,7 +24,7 @@ const context = await esbuild.context({
     bundle: true,
     minify: true,
     sourcemap: 'linked',
-    target: ['safari11', 'edge100']
+    target: ['safari16', 'edge100']
 });
 
 const buildNeutralinoApp = async () => {
