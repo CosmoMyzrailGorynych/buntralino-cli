@@ -21,7 +21,7 @@ interface NeutralinoConfig {
 import resedit from 'resedit-cli';
 import path from 'path';
 import fs from 'fs-extra';
-import {$} from 'execa';
+import {$} from 'bun';
 import {HERMITE, createICO, createICNS} from '@ctjs/png2icons';
 import task from '../common/task';
 
@@ -216,10 +216,11 @@ export default async (
         }, fs.remove(buildsDir));
     }
 
+    const neuBin = path.join(import.meta.dir, '../node_modules/.bin/neu');
     await task({
         text: 'Building the Neutralino.js app',
         finish: 'Neutralino.js app has been built successfully'
-    }, $`neu build`);
+    }, $`${neuBin} build`.cwd(projectRoot).quiet());
 
     await task({
         text: 'Packaging Bun into single-file executables',
@@ -230,16 +231,16 @@ export default async (
         const resourcesNeuPath = path.join(buildsDir, `${appName}/resources.neu`);
         const bunExePath = path.join(buildsDir, `bun/${appName}-${pf.neutralinoPostfix}`);
         const platformPostfix = pf.os === 'windows' ? '.exe' : '';
-        let $$ = $;
+        let cwd = process.cwd();
         if (path.dirname(index) !== projectRoot) {
-            $$ = $({
-                cwd: path.join(projectRoot, path.dirname(index))
-            });
+            cwd = path.join(projectRoot, path.dirname(index))
         }
         // Packaged bun applications for Windows silently crash if minified normally,
         // use weaker minification flags for now for Windows.
         const win = pf.os === 'windows';
-        await $$`bun build ${path.basename(index)} --compile --target=${pf.bunTarget} ${win ? '' : '--minify'} ${win ? '' : '--sourcemap'} --outfile ${bunExePath} ${buildArgs}`;
+        const minify = win ? [] : ['--minify', '--sourcemap'];
+        await $`bun build ${path.basename(index)} --compile --target=${pf.bunTarget} ${minify} --outfile ${bunExePath} ${buildArgs}`
+            .cwd(cwd).quiet();
         const bunOutPath = path.join(buildsDir, 'buntralinoOutput', pf.name, appName + platformPostfix)
         const neuOutPath = path.join(buildsDir, 'buntralinoOutput', pf.name, 'neutralino' + platformPostfix);
         const resourcesNeuOutPath = path.join(buildsDir, 'buntralinoOutput', pf.name, 'resources.neu');

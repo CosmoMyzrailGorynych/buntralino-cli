@@ -1,6 +1,6 @@
 import fs from 'fs-extra';
 import path from 'path';
-import {$} from 'execa';
+import {$} from 'bun';
 import task from '../common/task';
 import prompts from 'prompts';
 
@@ -65,8 +65,8 @@ export default async () => {
         text: 'Installing Buntralino packages',
         finish: 'Buntralino packages installed successfully'
     }, (async () => {
-        await $`bun add buntralino buntralino-client`;
-        await $`bun add -d buntralino-cli @types/bun`;
+        await $`bun add buntralino buntralino-client`.quiet();
+        await $`bun add -d buntralino-cli @types/bun`.quiet();
     })());
 
     await task({

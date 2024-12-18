@@ -35,7 +35,6 @@
     "@ctjs/png2icons": "^3.0.3",
     "@neutralinojs/neu": "^11.3.0",
     "@topcli/spinner": "^2.1.2",
-    "execa": "^9.5.2",
     "fs-extra": "^11.2.0",
     "prompts": "^2.4.2",
     "resedit-cli": "^2.0.1",

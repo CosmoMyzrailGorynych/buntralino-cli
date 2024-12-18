@@ -1,4 +1,4 @@
-import {$} from 'execa';
+import {$} from 'bun';
 import fs from 'fs-extra';
 import path from 'path';
 import task from '../common/task';
@@ -15,24 +15,21 @@ export default async (name = 'buntralino-app', template = 'new') => {
         fs.copy(path.join(import.meta.dir, '../templates', template), destPath)
     );
 
-    const $$ = $({
-        cwd: destPath,
-        preferLocal: true
-    });
+    const neuBin = path.join(import.meta.dir, '../node_modules/.bin/neu');
     await Promise.all([
         task({
             text: 'Installing dependencies',
             finish: 'Dependencies installed successfully'
          }, (async () => {
-            await $$`bun install`;
-            await $$`bun add buntralino buntralino-client`
-            await $$`bun add -d buntralino-cli`;
+            await $`bun install`.cwd(destPath).quiet();
+            await $`bun add buntralino buntralino-client`.cwd(destPath).quiet();
+            await $`bun add -d buntralino-cli`.cwd(destPath).quiet();
         })()),
 
         task({
             text: 'Installing Neutralino.js',
             finish: 'Neutralino.js installed successfully'
-        }, $$`neu update`),
+        }, $`${neuBin} update`.cwd(destPath).quiet()),
     ]);
 
     if (name !== 'buntralino-app') {
@@ -58,5 +55,5 @@ export default async (name = 'buntralino-app', template = 'new') => {
 
     console.log('\nTo get started, run:\n');
     console.log(`    cd ${name}`);
-    console.log('    bun run dev\n');
+    console.log('    bun run dev');
 };
