@@ -24,6 +24,7 @@ import fs from 'fs-extra';
 import {$} from 'bun';
 import {HERMITE, createICO, createICNS} from '@ctjs/png2icons';
 import task from '../common/task';
+import getNeu from '../common/getNeu';
 
 const platforms = [{
     os: 'linux',
@@ -133,7 +134,7 @@ const getInfoPlist = (appName: string, appId: string) => `<?xml version="1.0" en
     <key>LSApplicationCategoryType</key>
     <string>public.app-category.developer-tools</string>
     <key>LSMinimumSystemVersion</key>
-    <string>11.0.0</string>
+    <string>13.0.0</string>
     <key>LSUIElement</key>
     <true/>
 </dict>
@@ -216,11 +217,10 @@ export default async (
         }, fs.remove(buildsDir));
     }
 
-    const neuBin = path.join(import.meta.dir, '../node_modules/.bin/neu');
     await task({
         text: 'Building the Neutralino.js app',
         finish: 'Neutralino.js app has been built successfully'
-    }, $`bun ${neuBin} build`.cwd(projectRoot).quiet());
+    }, $`${getNeu()} build`.cwd(projectRoot).quiet());
 
     await task({
         text: 'Packaging Bun into single-file executables',
