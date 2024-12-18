@@ -44,4 +44,6 @@ if (Bun.argv.includes('dev')) {
 } else if (Bun.argv.includes('build')) {
     await buildNeutralinoApp();
     await buntralino.build(buntralinoIndex);
+    // Dispose of the ESBuild context to finish the process.
+    context.dispose();
 }
