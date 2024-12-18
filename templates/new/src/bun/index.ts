@@ -17,10 +17,7 @@ registerMethodMap(functionMap);
 
 await create('/', {
     // Name windows to easily manipulate them and distinguish them in events
-    name: 'main',
-    // It is better to remove or change this line when you're making production builds
-    // Inspector is always on while developing
-    enableInspector: process.argv.includes('forceDebug')
+    name: 'main'
 });
 
 // Exit the app completely when the main window is closed without the `shutdown` command.
