@@ -220,7 +220,7 @@ export default async (
     await task({
         text: 'Building the Neutralino.js app',
         finish: 'Neutralino.js app has been built successfully'
-    }, $`${neuBin} build`.cwd(projectRoot).quiet());
+    }, $`bun ${neuBin} build`.cwd(projectRoot).quiet());
 
     await task({
         text: 'Packaging Bun into single-file executables',

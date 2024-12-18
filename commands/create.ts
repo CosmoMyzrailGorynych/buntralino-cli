@@ -29,7 +29,7 @@ export default async (name = 'buntralino-app', template = 'new') => {
         task({
             text: 'Installing Neutralino.js',
             finish: 'Neutralino.js installed successfully'
-        }, $`${neuBin} update`.cwd(destPath).quiet()),
+        }, $`bun ${neuBin} update`.cwd(destPath).quiet()),
     ]);
 
     if (name !== 'buntralino-app') {
