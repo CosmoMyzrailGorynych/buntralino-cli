@@ -2,7 +2,6 @@ import {$} from 'bun';
 import fs from 'fs-extra';
 import path from 'path';
 import task from '../common/task';
-import getNeu from '../common/getNeu';
 
 export default async (name = 'buntralino-app', template = 'new') => {
     const destPath = path.join(process.cwd(), name);
@@ -29,7 +28,7 @@ export default async (name = 'buntralino-app', template = 'new') => {
         task({
             text: 'Installing Neutralino.js',
             finish: 'Neutralino.js installed successfully'
-        }, $`${getNeu()} update`.cwd(destPath).quiet()),
+        }, $`bunx --bun @neutralinojs/neu update`.cwd(destPath).quiet()),
     ]);
 
     if (name !== 'buntralino-app') {

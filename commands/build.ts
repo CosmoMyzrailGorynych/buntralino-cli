@@ -24,7 +24,6 @@ import fs from 'fs-extra';
 import {$} from 'bun';
 import {HERMITE, createICO, createICNS} from '@ctjs/png2icons';
 import task from '../common/task';
-import getNeu from '../common/getNeu';
 
 const platforms = [{
     os: 'linux',
@@ -220,7 +219,7 @@ export default async (
     await task({
         text: 'Building the Neutralino.js app',
         finish: 'Neutralino.js app has been built successfully'
-    }, $`${getNeu()} build`.cwd(projectRoot).quiet());
+    }, $`bunx --bun @neutralinojs/neu build`.cwd(projectRoot).quiet());
 
     await task({
         text: 'Packaging Bun into single-file executables',
