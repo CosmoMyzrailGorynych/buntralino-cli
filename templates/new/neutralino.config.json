@@ -28,8 +28,8 @@
   "modes": {
     "window": {
       "title": "Buntralino sample app",
-      "width": 600,
-      "height": 600,
+      "width": 500,
+      "height": 650,
       "minWidth": 400,
       "minHeight": 200,
       "center": true,
