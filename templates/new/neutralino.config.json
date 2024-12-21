@@ -47,7 +47,7 @@
     "binaryName": "buntralino",
     "resourcesPath": "/app/",
     "extensionsPath": "/extensions/",
-    "distributionPath": "/build",
+    "distributionPath": "/build/neutralino",
     "clientLibrary": "/app/js/neutralino.js",
     "binaryVersion": "5.5.0",
     "clientVersion": "5.5.0"

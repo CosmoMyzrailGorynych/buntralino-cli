@@ -149,7 +149,7 @@ const makeMacApp = async (opts: {
     neutralinoConfig: NeutralinoConfig
 }) => {
     // Create Mac app bundle structure
-    const appBundle = path.join(process.cwd(), 'build', 'buntralinoOutput', `${opts.pf.name} App`, `${opts.appName}.app`);
+    const appBundle = path.join(process.cwd(), 'build', `${opts.pf.name} App`, `${opts.appName}.app`);
     const contentsPath = path.join(appBundle, 'Contents');
     const macOsPath = path.join(contentsPath, 'MacOS');
     const resourcesPath = path.join(contentsPath, 'Resources');
@@ -202,13 +202,16 @@ export default async (
         console.error('neutralino.config.json not found. Make sure to run `buntralino build` in the root of your Buntralino project.');
         process.exit(1);
     }
-    if (['bun', 'buntralinoOutput', 'neutralino'].includes(neutralinoConfig.cli.binaryName)) {
-        throw new Error('Sorry, please pick an app name different from `bun`, `buntralinoOutput`, and `neutralino` in your neutralino.config.json :D');
+    const platformNames = platforms.map((pf) => pf.name);
+    if (['bun', 'neutralino', ...platformNames].includes(neutralinoConfig.cli.binaryName)) {
+        throw new Error('Please pick an app name different from `bun`, `neutralino`, and build targets\' names in your `neutralino.config.json`.');
     }
 
     const appName = neutralinoConfig.cli.binaryName;
 
     const buildsDir = path.join(projectRoot, 'build');
+    const neuBuildsDir = path.join(projectRoot, neutralinoConfig.cli.distributionPath ?? 'dist', `${appName}`);
+    const bunBuildsDir = path.join(buildsDir, 'bun');
     if (await fs.exists(buildsDir)) {
         await task({
             text: 'Removing stale builds',
@@ -226,9 +229,9 @@ export default async (
         finish: 'Bun packed successfully'
     }, Promise.all(platforms.map(async (pf) => {
         await fs.ensureDir('./build/bun');
-        const neutralinoExePath = path.join(projectRoot, `./${neutralinoConfig.cli?.distributionPath ?? 'dist'}/${appName}/${appName}-${pf.neutralinoPostfix}`);
-        const resourcesNeuPath = path.join(buildsDir, `${appName}/resources.neu`);
-        const bunExePath = path.join(buildsDir, `bun/${appName}-${pf.neutralinoPostfix}`);
+        const neutralinoExePath = path.join(neuBuildsDir, `${appName}-${pf.neutralinoPostfix}`);
+        const resourcesNeuPath = path.join(neuBuildsDir, `resources.neu`);
+        const bunExePath = path.join(bunBuildsDir, `${appName}-${pf.neutralinoPostfix}`);
         const platformPostfix = pf.os === 'windows' ? '.exe' : '';
         let cwd = process.cwd();
         if (path.dirname(index) !== projectRoot) {
@@ -240,9 +243,9 @@ export default async (
         const minify = win ? [] : ['--minify', '--sourcemap'];
         await $`bun build ${path.basename(index)} --compile --target=${pf.bunTarget} ${minify} --outfile ${bunExePath} ${buildArgs}`
             .cwd(cwd).quiet();
-        const bunOutPath = path.join(buildsDir, 'buntralinoOutput', pf.name, appName + platformPostfix)
-        const neuOutPath = path.join(buildsDir, 'buntralinoOutput', pf.name, 'neutralino' + platformPostfix);
-        const resourcesNeuOutPath = path.join(buildsDir, 'buntralinoOutput', pf.name, 'resources.neu');
+        const bunOutPath = path.join(buildsDir, pf.name, appName + platformPostfix)
+        const neuOutPath = path.join(buildsDir, pf.name, 'neutralino' + platformPostfix);
+        const resourcesNeuOutPath = path.join(buildsDir, pf.name, 'resources.neu');
         await Promise.all([
             fs.copy(neutralinoExePath, neuOutPath),
             fs.copy(bunExePath, bunOutPath),
@@ -272,5 +275,9 @@ export default async (
         }
     })));
 
-    console.log('\n🐇 Succcess! Packaged applications can be found in ' + path.join(projectRoot, './build/buntralinoOutput/') + '\n');
+    console.log('\n🐇 Succcess! Packaged applications can be found in ' + buildsDir);
+
+    // Remove unneeded folders
+    fs.remove(bunBuildsDir);
+    fs.remove(neuBuildsDir);
 };
