@@ -2,7 +2,7 @@
     This minimal build system uses the Buntralino CLI's programmatic API.
     The calls are equivalent to the command-line interface.
 
-    It also uses ESLint to bundle all the code for Neutralino.js application
+    It also uses ESBuild to bundle all the code for Neutralino.js application
     into one file. See ESBuild documentation for more details and make it your own:
     https://esbuild.github.io/
 
@@ -24,7 +24,20 @@ const context = await esbuild.context({
     bundle: true,
     minify: true,
     sourcemap: 'linked',
-    target: ['safari16', 'edge100']
+    target: ['safari16', 'edge100'],
+    // This simple plugin makes sure that only one copy of the Buntralino client is included,
+    // even if it is imported with both `import` and `require`.
+    plugins: [{
+        name: 'dedupe-buntralino-client',
+        setup({onResolve}) {
+            const buntralinoClient = import.meta.resolve('buntralino-client').replace('file:///', '');
+            onResolve({
+                filter: /^buntralino-client$/
+            }, () => ({
+                path: buntralinoClient
+            }));
+        }
+    }]
 });
 
 const buildNeutralinoApp = async () => {
