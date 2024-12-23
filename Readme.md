@@ -1,10 +1,12 @@
-![Buntralino logo](./Buntralino@smoll.png)
+![Buntralino logo](https://buntralino.github.io/Buntralino.png)
 
-# (🏗️ WIP 🚧) Buntralino CLI tools
+# Buntralino CLI tools
 
 Buntralino unites Bun and Neutralino.js to make a simpler, lighter alternative to Electron and NW.js. Use Neutralino.js API at client and send harder tasks to Bun while keeping your development process easy.
 
 Buntralino is a hybrid app development framework that lets you use web technologies (HTML, CSS, JavaScript, TypeScript) to make desktop apps. Buntralino applications work by creating a Bun application that launches and manages Neutralino.js windows. Neutralino.js windows can exchange information with Bun and each other in a client-server model through websockets, with you using a nice promise-based API. Bun is a faster alternative to Node.js or Deno, while Neutralino.js uses native OS' browser and augments it with native functions.
+
+[See the documentation for Buntralino here.](https://buntralino.github.io/)
 
 ## Installation
 
