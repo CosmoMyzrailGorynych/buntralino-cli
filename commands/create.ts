@@ -39,14 +39,22 @@ export default async (name = 'buntralino-app', template = 'new') => {
             fs.readJson(path.join(destPath, 'package.json'))
             .then(packageJson => {
                 packageJson.name = name;
-                return fs.writeJson(path.join(destPath, 'package.json'), packageJson);
+                return fs.writeJson(
+                    path.join(destPath, 'package.json'),
+                    packageJson,
+                    {spaces: 2}
+                );
             }),
             fs.readJson(path.join(destPath, 'neutralino.config.json'))
             .then(neutralinoConfig => {
                 neutralinoConfig.applicationName = name;
                 neutralinoConfig.modes.window.title = name;
                 neutralinoConfig.cli.binaryName = name;
-                return fs.writeJson(path.join(destPath, 'neutralino.config.json'), neutralinoConfig);
+                return fs.writeJson(
+                    path.join(destPath, 'neutralino.config.json'),
+                    neutralinoConfig,
+                    {spaces: 2}
+                );
             })
         ]));
     }
