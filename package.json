@@ -1,6 +1,6 @@
 {
   "name": "buntralino-cli",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "main": "index.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -31,6 +31,11 @@
   "author": "Cosmo Myzrail Gorynych",
   "license": "MIT",
   "description": "Buntralino unites Bun and Neutralino.js to make a simpler, lighter alternative to Electron and NW.js. Use Neutralino.js API at client and send harder tasks to Bun while keeping your development process easy.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/buntralino/buntralino-cli.git"
+  },
+  "homepage": "https://buntralino.github.io/",
   "dependencies": {
     "@ctjs/png2icons": "^3.0.3",
     "@neutralinojs/neu": "^11.3.0",
