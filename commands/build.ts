@@ -196,7 +196,7 @@ export default async (
 ) => {
     let neutralinoConfig: NeutralinoConfig;
     try {
-        neutralinoConfig = await fs.readJSON(path.resolve(process.cwd(), 'neutralino.config.json'));
+        neutralinoConfig = await fs.readJSON(path.resolve(projectRoot, 'neutralino.config.json'));
     }
     catch (error) {
         console.error('neutralino.config.json not found. Make sure to run `buntralino build` in the root of your Buntralino project.');
