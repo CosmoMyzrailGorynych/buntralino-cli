@@ -30,7 +30,8 @@ const context = await esbuild.context({
     plugins: [{
         name: 'dedupe-buntralino-client',
         setup({onResolve}) {
-            const buntralinoClient = import.meta.resolve('buntralino-client').replace('file:///', '');
+            const pattern = process.platform === 'win32' ? 'file:///' : 'file://';
+            const buntralinoClient = import.meta.resolve('buntralino-client').replace(pattern, '');
             onResolve({
                 filter: /^buntralino-client$/
             }, () => ({
