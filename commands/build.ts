@@ -25,7 +25,13 @@ import {$} from 'bun';
 import {HERMITE, createICO, createICNS} from '@ctjs/png2icons';
 import task from '../common/task';
 
-const platforms = [{
+type BuntralinoPlatform = {
+    os: 'linux' | 'macos' | 'windows';
+    name: string;
+    neutralinoPostfix: string;
+    bunTarget: string;
+}
+const platforms: BuntralinoPlatform[] = [{
     os: 'linux',
     name: 'Linux arm64',
     neutralinoPostfix: 'linux_arm64',
