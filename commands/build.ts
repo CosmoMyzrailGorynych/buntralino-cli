@@ -265,6 +265,14 @@ export default async (
                 fs.chmod(bunOutPath, '755')
             ]);
         }
+        // Building on Windows magically fails, probably because of filesystem buffering and/or antivirus scanning.
+        // Wait a bit for the Windows executable to cool, and only then patch it.
+        if (process.platform === 'win32' && pf.os === 'windows') {
+            await task({
+                text: 'Waiting a couple seconds because Windows is an idiot',
+                finish: 'We have waited a couple seconds for ' + pf.name + ' because Windows is an idiot'
+            }, new Promise(resolve => setTimeout(resolve, 5_000)));
+        }
         if (pf.os === 'windows') {
             await patchWinExecutable(bunOutPath, projectRoot, neutralinoConfig);
         }
