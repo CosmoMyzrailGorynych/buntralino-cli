@@ -101,25 +101,28 @@ const patchWinExecutable = async (exePath: string, projectRoot: string, neutrali
 
     await makeWindowsBinGui(exePath);
 
-    let iconPath = getIconPath(neutralinoConfig, projectRoot);
-    const ico = createICO(await fs.readFile(iconPath), HERMITE, 0, true, true)!;
     const tempFolder = await fs.mkdtemp('buntralino-temp-');
-    iconPath = path.join(tempFolder, 'buntralino.ico');
-    await fs.writeFile(iconPath, ico as unknown as DataView);
-    const exePatch = {
-        icon: [`IDR_MAINFRAME,${iconPath}`],
-        'product-name': neutralinoConfig.applicationName ?? neutralinoConfig.cli?.binaryName ?? 'A Buntralino application',
-        'product-version': neutralinoConfig.version.split('-')[0] + '.0',
-        'file-description': neutralinoConfig.description ?? neutralinoConfig.applicationName ?? 'A Buntralino application',
-        'file-version': neutralinoConfig.version.split('-')[0] + '.0',
-        'original-filename': neutralinoConfig.cli?.binaryName + '.exe'
-    };
-    await resedit({
-        in: exePath,
-        out: exePath,
-        ...exePatch
-    });
-    await fs.remove(tempFolder);
+    try {
+        let iconPath = getIconPath(neutralinoConfig, projectRoot);
+        const ico = createICO(await fs.readFile(iconPath), HERMITE, 0, true, true)!;
+        iconPath = path.join(tempFolder, 'buntralino.ico');
+        await fs.writeFile(iconPath, ico as unknown as DataView);
+        const exePatch = {
+            icon: [`IDR_MAINFRAME,${iconPath}`],
+            'product-name': neutralinoConfig.applicationName ?? neutralinoConfig.cli?.binaryName ?? 'A Buntralino application',
+            'product-version': neutralinoConfig.version.split('-')[0] + '.0',
+            'file-description': neutralinoConfig.description ?? neutralinoConfig.applicationName ?? 'A Buntralino application',
+            'file-version': neutralinoConfig.version.split('-')[0] + '.0',
+            'original-filename': neutralinoConfig.cli?.binaryName + '.exe'
+        };
+        await resedit({
+            in: exePath,
+            out: exePath,
+            ...exePatch
+        });
+    } finally {
+        await fs.remove(tempFolder);
+    }
 })());
 
 const getInfoPlist = (appName: string, appId: string) => `<?xml version="1.0" encoding="UTF-8"?>
