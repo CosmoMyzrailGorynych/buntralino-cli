@@ -1,23 +1,57 @@
 #!/usr/bin/env bun
 
 import yargs from 'yargs';
-import {hideBin } from 'yargs/helpers';
+import {hideBin} from 'yargs/helpers';
+import {select, question} from '@topcli/prompts';
 
 import build from './commands/build.ts';
 import create from './commands/create.ts';
 import run from './commands/run.ts';
 import add from './commands/add.ts';
 
+const templates = [{
+    name: 'new',
+    description: 'The default minimal Buntralino template with ESBuild for bundling scripts for the Neutralino app.'
+}, {
+    name: 'vite',
+    description: 'A Buntralino template with Vite as frontend builder and task runner. Can be expanded for any UI framework.'
+}];
+
 yargs(hideBin(process.argv))
-.command('create [name]', 'Creates an empty Buntralino project', (yargs) => {
-    return yargs.positional('name', {
+.command('create [name] [templateName]', 'Creates an empty Buntralino project', (yargs) => {
+    return yargs
+    .positional('name', {
         type: 'string',
-        describe: 'The name for the created project',
-        default: 'buntralino-app'
-    });
+        describe: 'The name for the created project'
+    })
+    .positional('templateName', {
+        type: 'string',
+        describe: 'The name of the template to clone.',
+        choices: templates.map(t => t.name)
+    })
+    .epilog(`Templates' descriptions:\n\n${templates.map(t => `${t.name}\n    ${t.description}`).join('\n')}`);
 }, async (argv) => {
-    const name = argv.name ?? 'buntralino-app';
-    await create(name, 'new');
+    let name, templateName;
+    if (argv.name) {
+        name = argv.name;
+    } else {
+        name = await question('Enter your project\'s name:', {
+            defaultValue: 'buntralino-app'
+        });
+        name ??= 'buntralino-app';
+    }
+    if (argv.templateName && templates.find(t => t.name === argv.templateName)) {
+        templateName = argv.templateName;
+    } else {
+        templateName = await select('Choose a template:', {
+            choices: templates.map(t => ({
+                label: t.name,
+                value: t.name,
+                description: t.description
+            }))
+        });
+    }
+    await create(name, templateName);
 })
 .command('add', 'Adds Buntralino to the existing Neutralino.js project', (yargs) => {
     return yargs;

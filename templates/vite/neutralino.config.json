@@ -1,0 +1,51 @@
+{
+    "$schema": "https://raw.githubusercontent.com/neutralinojs/neutralinojs/main/schemas/neutralino.config.schema.json",
+    "applicationId": "rocks.buntralino.samplevite",
+    "version": "1.0.0",
+    "applicationName": "vite-template",
+    "author": "Cosmo Myzrail Gorynych",
+    "description": "A sample application for Buntralino",
+    "defaultMode": "window",
+    "enableServer": true,
+    "enableNativeAPI": true,
+    "tokenSecurity": "one-time",
+    "url": "/",
+    "port": 0,
+    "documentRoot": "/app/",
+    "logging": {
+        "enabled": true,
+        "writeToLogFile": true
+    },
+    "nativeAllowList": [
+        "events.*",
+        "app.*",
+        "os.*",
+        "debug.log"
+    ],
+    "modes": {
+        "window": {
+            "title": "vite-template",
+            "width": 600,
+            "height": 600,
+            "minWidth": 400,
+            "minHeight": 200,
+            "center": true,
+            "fullScreen": false,
+            "alwaysOnTop": false,
+            "icon": "/app/icon.png",
+            "enableInspector": true,
+            "borderless": false,
+            "maximize": false,
+            "hidden": false,
+            "resizable": true,
+            "exitProcessOnClose": true
+        }
+    },
+    "cli": {
+        "binaryName": "vite-template",
+        "resourcesPath": "/app/",
+        "extensionsPath": "/extensions/",
+        "binaryVersion": "5.6.0",
+        "clientVersion": "5.6.0"
+    }
+}

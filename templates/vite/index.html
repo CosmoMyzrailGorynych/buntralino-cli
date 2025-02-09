@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Buntralino+Vite sample app</title>
+    <link rel="stylesheet" href="/src/styles/index.css">
+</head>
+
+<body>
+    <div id="neutralinoapp">
+        <img src="/icon.png" class="logo" alt="Buntralino logo" />
+        <h1>Buntralino + Vite</h1>
+        <div>
+            <a href="#" onclick="openDocs();">Docs for Buntralino</a> &middot;
+            <a href="#" onclick="openNeutralinoDocs();">Docs for Neutralino.js API</a>
+            <a href="#" onclick="openViteDocs();">Docs for Vite</a>
+        </div>
+    </div>
+    <div id="theBunCheck">
+        Checking Buntralino connection…
+        <span class="rotate">🐰</span>
+    </div>
+    <!-- Your app's bundled scripts -->
+    <script type="module" src="/src/neutralino/index.ts"></script>
+</body>
+
+</html>

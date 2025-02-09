@@ -2,7 +2,7 @@ import fs from 'fs-extra';
 import path from 'path';
 import {$} from 'bun';
 import task from '../common/task';
-import prompts from 'prompts';
+import {question} from '@topcli/prompts';
 
 export default async () => {
     // Check for neutralino.config.json first
@@ -14,11 +14,7 @@ export default async () => {
     let indexPath = 'index.ts';
     while (await fs.exists(indexPath)) {
         console.log(`The file "${indexPath}" already exists. Please choose a different name.`);
-        indexPath = (await prompts({
-            type: 'text',
-            name: 'indexPath',
-            message: 'Enter the name for your main Bun file:'
-        })).indexPath;
+        indexPath = await question('Enter the name for your main Bun file:');
     }
 
     // Check/create package.json

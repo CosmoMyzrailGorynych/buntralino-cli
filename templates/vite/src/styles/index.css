@@ -1,0 +1,93 @@
+html, body {
+    position: relative;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    background-color: #18181c;
+    color: white;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    justify-content: space-around;
+    font-family: sans-serif;
+}
+
+a {
+    color: #fff;
+}
+
+#neutralinoapp {
+    text-align: center;
+    -webkit-user-select: none;
+    user-select: none;
+    cursor: default;
+    animation: flowIn 1 1s cubic-bezier(0.24, 0, 0.2, 1);
+}
+
+.logo {
+    max-width: 100%;
+    width: 300px;
+    animation: glow infinite 3s ease-in-out;
+    filter: drop-shadow(0 0.5rem 1rem #dbe4a622);
+}
+
+#neutralinoapp h1 {
+    font-family: serif;
+    font-size: 2.5rem;
+    margin: 0.5em 0;
+}
+
+#neutralinoapp > div {
+    font-size: 16px;
+    font-weight: normal;
+}
+
+@keyframes flowIn {
+    0% {
+        transform: translate(0, 5rem) scale(0.85);
+        opacity: 0;
+    }
+}
+@keyframes glow {
+    0%, 100% {
+        filter: drop-shadow(0 0.75rem 1.5rem #e8ff6122) drop-shadow(0 -0.25rem 0.75rem #c4ff1522);
+    }
+    25% {
+        filter: drop-shadow(0.75rem 0.25rem 1.5rem #dbe4a622) drop-shadow(-0.5rem 0.25rem 0.75rem #ddff1522);
+    }
+    50% {
+        filter: drop-shadow(0 -0.5rem 1.5rem #dbe4a622) drop-shadow(0 0.75rem 0.75rem #fffe1522);
+    }
+    75% {
+        filter: drop-shadow(-0.75rem 0.25rem 1.5rem #dbe4a622) drop-shadow(0.5rem 0.25rem 0.75rem #ddff1522);
+    }
+}
+
+#theBunCheck {
+    padding: 0.25rem 0.5rem;
+    border: 1px solid;
+    color: #ccc;
+    background: #88888833;
+    border-radius: 0.25rem;
+    box-shadow: 0 0.25rem 1rem -0.75rem;
+    margin: 2rem auto 0;
+    max-width: 320px;
+}
+#theBunCheck.warning {
+    border: 1px solid; 
+    color: #ffe97c;
+    background: #96631c33;
+}
+#theBunCheck.success {
+    border: 1px solid;
+    color: #0effb3;
+    background: #1c967733;
+}
+#theBunCheck.error {
+    border: 1px solid;
+    color: #ff7676;
+    background: #961c1c33;
+}
