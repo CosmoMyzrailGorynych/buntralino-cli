@@ -29,9 +29,11 @@ yargs(hideBin(process.argv))
         type: 'string',
         describe: 'Path to the main Bun file',
         default: 'index.ts'
-    });
+    }).epilog(
+        'Use -- to provide additional arguments to the main script. Example: `buntralino run index.ts -- --devMode`'
+    );
 }, async (argv) => {
-    await run(argv.indexPath);
+    await run(argv.indexPath, argv._.slice(1).map(e => e.toString()));
 })
 .command('build [indexPath]', 'Builds the project for distribution', (yargs) => {
     return yargs.positional('indexPath', {
